@@ -38,7 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(children: _articles.map(_buildItem).toList()),
+      body: RefreshIndicator(
+          onRefresh: () async {
+            return Future.delayed(const Duration(seconds: 2));
+          },
+          child: ListView(children: _articles.map(_buildItem).toList())),
     );
   }
 
@@ -55,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text(article.url),
         ),
         onTap: () async {
-          if(await canLaunch(article.url)) {
+          if (await canLaunch(article.url)) {
             await launch(article.url);
           }
         },
