@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackernews_app/src/article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,6 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(article.url),
         ),
+        onTap: () async {
+          if(await canLaunch(article.url)) {
+            await launch(article.url);
+          }
+        },
       ),
     );
   }
