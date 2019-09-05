@@ -16,6 +16,22 @@ class Article {
     this.time,
     this.type,
   });
+
+  factory Article.fromJson(Map<String, dynamic> json) {
+    if (json == null) {
+      return null;
+    }
+
+    return Article(
+      title: json['title'],
+      url: json['url'],
+      by: json['by'],
+      id: json['id'],
+      score: json['score'] ?? 0,
+      time: json['time'],
+      type: json['type'],
+    );
+  }
 }
 
 final articles = [
